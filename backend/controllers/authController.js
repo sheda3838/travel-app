@@ -1,5 +1,5 @@
-import generateToken from "../utils/generateTokens";
-import User from "../models/User";
+import generateToken from "../utils/generateTokens.js";
+import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 
 export const registerUser = async (req, res) => {
@@ -92,3 +92,4 @@ export const loginUser = async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to log in user" });
   }
 };
+
