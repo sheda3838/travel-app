@@ -39,7 +39,7 @@ export const getAll = async (req, resp) => {
   try {
     //added pagination
     const page = parseInt(req.query.page, 10) || 1;
-    const limit = parseInt(req.query.limit, 10) || 6;
+    const limit = parseInt(req.query.limit, 10) || 9;
     const skip = (page - 1) * limit;
 
     //added search feature
@@ -175,8 +175,25 @@ export const deleteOne = async (req, resp) => {
 //get experience for logged in user
 export const getMine = async (req, resp) => {
   try {
-    const experiences = await Experience.find({ creator: req.user._id });
-    resp.status(200).json({ success: true, data: experiences });
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = parseInt(req.query.limit, 10) || 9;
+    const skip = (page - 1) * limit;
+
+    const experiences = await Experience.find({ creator: req.user._id })
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    const total = await Experience.countDocuments({ creator: req.user._id });
+
+    resp.status(200).json({
+      success: true,
+      count: experiences.length,
+      total,
+      page,
+      pages: Math.ceil(total / limit),
+      data: experiences,
+    });
   } catch (error) {
     console.error(error);
     resp
