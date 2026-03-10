@@ -1,13 +1,29 @@
-import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import CreateExperience from "./pages/CreateExperience";
+import EditExperience from "./pages/EditExperience";
+import MyExperiences from "./pages/MyExperiences";
+
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <h1 className="text-3xl font-bold text-blue-600">
-        Tailwind is working
-      </h1>
-    </div>
+    <BrowserRouter>
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/create" element={<CreateExperience />} />
+        <Route path="/edit/:id" element={<EditExperience />} />
+        <Route path="/my-experiences" element={<MyExperiences />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-export default App
+export default App;
