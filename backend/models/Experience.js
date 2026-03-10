@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const experienceSchema = new mongoose.Schema(
   {
@@ -30,5 +30,4 @@ const experienceSchema = new mongoose.Schema(
   { timestamps: true }, //creates createdAt & updatedAt automatically
 );
 
-module.exports = mongoose.model("Experience", experienceSchema);
-export default Experience;
+export default mongoose.model("Experience", experienceSchema);
