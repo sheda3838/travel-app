@@ -39,7 +39,7 @@ export const getAll = async (req, resp) => {
   try {
     //added pagination
     const page = parseInt(req.query.page, 10) || 1;
-    const limit = parseInt(req.query.limit, 10) || 9;
+    const limit = parseInt(req.query.limit, 10) || 6;
     const skip = (page - 1) * limit;
 
     //added search feature
@@ -176,7 +176,7 @@ export const deleteOne = async (req, resp) => {
 export const getMine = async (req, resp) => {
   try {
     const page = parseInt(req.query.page, 10) || 1;
-    const limit = parseInt(req.query.limit, 10) || 9;
+    const limit = parseInt(req.query.limit, 10) || 6;
     const skip = (page - 1) * limit;
 
     const experiences = await Experience.find({ creator: req.user._id })
