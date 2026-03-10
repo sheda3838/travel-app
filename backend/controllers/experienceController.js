@@ -19,7 +19,7 @@ export const create = async (req, resp) => {
       location,
       price,
       imageUrl,
-      creator: req.user.id,
+      creator: req.user._id,
     });
     resp.status(201).json({
       success: true,
@@ -37,10 +37,37 @@ export const create = async (req, resp) => {
 //get all experiences
 export const getAll = async (req, resp) => {
   try {
-    const experiences = await Experience.find()
+    //added pagination
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = parseInt(req.query.limit, 10) || 6;
+    const skip = (page - 1) * limit;
+
+    //added search feature
+    const keyword = req.query.q
+      ? {
+          $or: [
+            { title: { $regex: req.query.q, $options: "i" } },
+            { location: { $regex: req.query.q, $options: "i" } },
+          ],
+        }
+      : {};
+
+    const experiences = await Experience.find({ ...keyword })
       .sort({ createdAt: -1 }) //sort latest created experience
+      .skip(skip)
+      .limit(limit)
       .populate("creator", "name email"); //fetch creator details
-    resp.status(200).json({ success: true, data: experiences });
+
+    const total = await Experience.countDocuments({ ...keyword });
+
+    resp.status(200).json({
+      success: true,
+      count: experiences.length,
+      total,
+      page,
+      pages: Math.ceil(total / limit),
+      data: experiences,
+    });
   } catch (error) {
     console.error(error);
     resp
@@ -87,7 +114,7 @@ export const update = async (req, resp) => {
     }
 
     //check permissions
-    if (experience.creator.toString() !== req.user.id) {
+    if (experience.creator.toString() !== req.user._id.toString()) {
       return resp.status(401).json({ success: false, message: "Unauthorized" });
     }
 
@@ -129,7 +156,7 @@ export const deleteOne = async (req, resp) => {
     }
 
     //check permissions
-    if (experience.creator.toString() !== req.user.id) {
+    if (experience.creator.toString() !== req.user._id.toString()) {
       return resp.status(401).json({ success: false, message: "Unauthorized" });
     }
 
@@ -148,7 +175,7 @@ export const deleteOne = async (req, resp) => {
 //get experience for logged in user
 export const getMine = async (req, resp) => {
   try {
-    const experiences = await Experience.find({ creator: req.user.id });
+    const experiences = await Experience.find({ creator: req.user._id });
     resp.status(200).json({ success: true, data: experiences });
   } catch (error) {
     console.error(error);
