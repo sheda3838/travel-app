@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -7,11 +7,11 @@ import CreateExperience from "./pages/CreateExperience";
 import EditExperience from "./pages/EditExperience";
 import MyExperiences from "./pages/MyExperiences";
 
-import Navbar from "./components/Navbar";
+import Navbar from "./components/NavBar";
 
 function App() {
   return (
-    <BrowserRouter>
+    <>
       <Navbar />
 
       <Routes>
@@ -22,7 +22,7 @@ function App() {
         <Route path="/edit/:id" element={<EditExperience />} />
         <Route path="/my-experiences" element={<MyExperiences />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 
