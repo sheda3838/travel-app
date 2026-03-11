@@ -1,6 +1,6 @@
-import React from 'react';
-import { useAuth } from '../context/AuthContext';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { useAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 function ExperienceModel({ experience, onDelete }) {
   const { user } = useAuth();
@@ -12,11 +12,12 @@ function ExperienceModel({ experience, onDelete }) {
       month: "long",
       day: "numeric",
       hour: "2-digit",
-      minute: "2-digit"
+      minute: "2-digit",
     });
   };
 
-  const isCreator = user && experience.creator && user.id === experience.creator._id;
+  const isCreator =
+    user && experience.creator && user.id === experience.creator._id;
 
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 max-w-5xl mx-auto flex flex-col md:flex-row">
@@ -29,7 +30,8 @@ function ExperienceModel({ experience, onDelete }) {
             className="w-full h-full object-cover"
             onError={(e) => {
               e.target.onerror = null;
-              e.target.src = "https://via.placeholder.com/800x600?text=Image+Not+Found";
+              e.target.src =
+                "https://via.placeholder.com/800x600?text=Image+Not+Found";
             }}
           />
         ) : (
@@ -74,13 +76,13 @@ function ExperienceModel({ experience, onDelete }) {
           <div className="flex justify-between items-center mt-2 bg-gray-50 p-4 rounded-lg">
             {isCreator ? (
               <div className="flex gap-3 w-full justify-end">
-                <Link 
+                <Link
                   to={`/edit/${experience._id}`}
                   className="px-6 py-2 bg-blue-100 text-blue-700 font-semibold rounded-lg hover:bg-blue-200 transition text-center"
                 >
                   Edit Experience
                 </Link>
-                <button 
+                <button
                   onClick={() => onDelete && onDelete(experience._id)}
                   className="px-6 py-2 bg-red-100 text-red-700 font-semibold rounded-lg hover:bg-red-200 transition"
                 >
@@ -90,11 +92,15 @@ function ExperienceModel({ experience, onDelete }) {
             ) : (
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                  {experience.creator?.name ? experience.creator.name.charAt(0).toUpperCase() : "U"}
+                  {experience.creator?.name
+                    ? experience.creator.name.charAt(0).toUpperCase()
+                    : "U"}
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">Posted by</p>
-                  <p className="font-semibold text-gray-900">{experience.creator?.name || "Unknown User"}</p>
+                  <p className="font-semibold text-gray-900">
+                    {experience.creator?.name || "Unknown User"}
+                  </p>
                 </div>
               </div>
             )}

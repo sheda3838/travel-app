@@ -39,7 +39,10 @@ function ExperienceForm({ initialData = {}, onSubmit, isLoading }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md max-w-2xl mx-auto">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white p-6 rounded-lg shadow-md max-w-2xl mx-auto"
+    >
       <div className="mb-4">
         <label htmlFor="title" className="block text-gray-700 font-medium mb-2">
           Title *
@@ -57,7 +60,10 @@ function ExperienceForm({ initialData = {}, onSubmit, isLoading }) {
       </div>
 
       <div className="mb-4">
-        <label htmlFor="location" className="block text-gray-700 font-medium mb-2">
+        <label
+          htmlFor="location"
+          className="block text-gray-700 font-medium mb-2"
+        >
           Location *
         </label>
         <input
@@ -73,7 +79,10 @@ function ExperienceForm({ initialData = {}, onSubmit, isLoading }) {
       </div>
 
       <div className="mb-4">
-        <label htmlFor="imageUrl" className="block text-gray-700 font-medium mb-2">
+        <label
+          htmlFor="imageUrl"
+          className="block text-gray-700 font-medium mb-2"
+        >
           Image URL *
         </label>
         <input
@@ -89,13 +98,14 @@ function ExperienceForm({ initialData = {}, onSubmit, isLoading }) {
         {formData.imageUrl && (
           <div className="mt-4">
             <p className="text-sm text-gray-500 mb-2">Image Preview:</p>
-            <img 
-              src={formData.imageUrl} 
-              alt="Experience Preview" 
+            <img
+              src={formData.imageUrl}
+              alt="Experience Preview"
               className="w-full h-48 object-cover rounded-md border"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = "https://via.placeholder.com/400x200?text=Invalid+Image+URL";
+                e.target.src =
+                  "https://via.placeholder.com/400x200?text=Invalid+Image+URL";
               }}
             />
           </div>
@@ -123,7 +133,10 @@ function ExperienceForm({ initialData = {}, onSubmit, isLoading }) {
       </div>
 
       <div className="mb-6">
-        <label htmlFor="description" className="block text-gray-700 font-medium mb-2">
+        <label
+          htmlFor="description"
+          className="block text-gray-700 font-medium mb-2"
+        >
           Description *
         </label>
         <textarea
@@ -142,7 +155,9 @@ function ExperienceForm({ initialData = {}, onSubmit, isLoading }) {
         type="submit"
         disabled={isLoading}
         className={`w-full py-2 px-4 text-white font-medium rounded-md transition ${
-          isLoading ? "bg-blue-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+          isLoading
+            ? "bg-blue-400 cursor-not-allowed"
+            : "bg-blue-600 hover:bg-blue-700"
         }`}
       >
         {isLoading ? "Saving..." : "Save Experience"}

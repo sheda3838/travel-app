@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 function Pagination({ page, pages, onPageChange }) {
   if (!pages || pages <= 1) return null;
