@@ -5,7 +5,7 @@ export const create = async (req, resp) => {
   const { title, description, location, price, imageUrl } = req.body;
 
   //input validations
-  if (!title || !description || !location || !price || !imageUrl) {
+  if (!title || !description || !location || !imageUrl) {
     return resp
       .status(400)
       .json({ success: false, message: "All fields are required" });
@@ -99,7 +99,7 @@ export const update = async (req, resp) => {
   const { title, description, location, price, imageUrl } = req.body;
 
   //input validations
-  if (!title || !description || !location || !price || !imageUrl) {
+  if (!title || !description || !location || !imageUrl) {
     return resp
       .status(400)
       .json({ success: false, message: "All fields are required" });
