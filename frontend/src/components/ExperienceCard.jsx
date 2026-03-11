@@ -1,9 +1,10 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function ExperienceCard({ experience, onDelete }) {
   const { user } = useAuth();
+  const navigate = useNavigate();
   if (!experience) return null;
 
   const truncateDescription = (text, maxLength = 100) => {
@@ -55,16 +56,18 @@ function ExperienceCard({ experience, onDelete }) {
               >
                 Edit
               </button>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  onDelete(experience._id);
-                }}
-                className="text-red-600 hover:text-red-800 font-medium px-2 py-1 rounded hover:bg-red-50 transition"
-              >
-                Delete
-              </button>
+              {onDelete && (
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onDelete(experience._id);
+                  }}
+                  className="text-red-600 hover:text-red-800 font-medium px-2 py-1 rounded hover:bg-red-50 transition"
+                >
+                  Delete
+                </button>
+              )}
             </>
           ) : (
             <span className="font-medium">By: {experience.creator?.name || "Unknown User"}</span>

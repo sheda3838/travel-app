@@ -47,6 +47,22 @@ function Home() {
     setSelectedExperience(null);
   };
 
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this experience? This action cannot be undone.")) {
+      try {
+        await api.delete(`/experiences/${id}`);
+        // Close modal if open for this experience
+        if (selectedExperience?._id === id) {
+          setSelectedExperience(null);
+        }
+        fetchExperiences(); 
+      } catch (err) {
+        console.error(err);
+        alert(err.response?.data?.message || "Failed to delete experience");
+      }
+    }
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Header and Search */}
@@ -88,7 +104,7 @@ function Home() {
                 className="cursor-pointer transform hover:-translate-y-1 transition duration-200 h-full"
                 onClick={() => setSelectedExperience(exp)}
               >
-                <ExperienceCard experience={exp} />
+                <ExperienceCard experience={exp} onDelete={handleDelete} />
               </div>
             ))}
           </div>
@@ -115,7 +131,7 @@ function Home() {
               &times;
             </button>
             <div className="bg-white rounded-xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto w-full">
-              <ExperienceModel experience={selectedExperience} />
+              <ExperienceModel experience={selectedExperience} onDelete={handleDelete} />
             </div>
           </div>
         </div>
