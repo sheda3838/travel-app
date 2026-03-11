@@ -36,22 +36,31 @@ function ExperienceCard({ experience, onDelete }) {
       </div>
       <p className="text-sm text-gray-500 mb-3">{experience.location}</p>
       
+
       <p className="text-gray-700 text-sm mb-4 flex-grow">
         {truncateDescription(experience.description, 80)}
       </p>
-      
+
       <div className="flex justify-between items-center mt-auto pt-4 border-t border-gray-100 text-xs text-gray-500">
         <div className="flex items-center gap-2">
           {isCreator ? (
             <>
-              <Link 
-                to={`/edit/${experience._id}`}
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  navigate(`/edit/${experience._id}`);
+                }}
                 className="text-blue-600 hover:text-blue-800 font-medium px-2 py-1 rounded hover:bg-blue-50 transition"
               >
                 Edit
-              </Link>
-              <button 
-                onClick={() => onDelete && onDelete(experience._id)}
+              </button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onDelete(experience._id);
+                }}
                 className="text-red-600 hover:text-red-800 font-medium px-2 py-1 rounded hover:bg-red-50 transition"
               >
                 Delete

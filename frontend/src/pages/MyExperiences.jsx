@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import api from '../api/axios';
 import ExperienceCard from '../components/ExperienceCard';
+import ExperienceModel from '../components/ExperienceModel';
 import Pagination from '../components/Pagination';
 
 function MyExperiences() {
@@ -11,6 +12,9 @@ function MyExperiences() {
   // Pagination state
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+
+  // Modal state
+  const [selectedExperience, setSelectedExperience] = useState(null);
 
   const fetchMyExperiences = useCallback(async () => {
     setLoading(true);
@@ -35,13 +39,20 @@ function MyExperiences() {
     if (window.confirm("Are you sure you want to delete this experience? This action cannot be undone.")) {
       try {
         await api.delete(`/experiences/${id}`);
-        // Remove locally from state rather than refetching or just refetch
+        // Close modal if open for this experience
+        if (selectedExperience?._id === id) {
+          setSelectedExperience(null);
+        }
         fetchMyExperiences(); 
       } catch (err) {
         console.error(err);
         alert(err.response?.data?.message || "Failed to delete experience");
       }
     }
+  };
+
+  const closeModel = () => {
+    setSelectedExperience(null);
   };
 
   return (
@@ -70,16 +81,45 @@ function MyExperiences() {
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {experiences.map((exp) => (
-              <ExperienceCard 
+              <div 
                 key={exp._id} 
-                experience={exp} 
-                onDelete={handleDelete} 
-              />
+                className="cursor-pointer transform hover:-translate-y-1 transition duration-200 h-full"
+                onClick={() => setSelectedExperience(exp)}
+              >
+                <ExperienceCard 
+                  experience={exp} 
+                  onDelete={handleDelete} 
+                />
+              </div>
             ))}
           </div>
           
           <Pagination page={page} pages={totalPages} onPageChange={setPage} />
         </>
+      )}
+
+      {/* Modal Overlay for Experience Details */}
+      {selectedExperience && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-60 z-50 flex justify-center items-center p-4 overflow-y-auto backdrop-blur-sm"
+          onClick={closeModel}
+        >
+          <div 
+            className="relative w-full max-w-5xl my-8 md:my-auto outline-none focus:outline-none"
+            onClick={(e) => e.stopPropagation()} // Prevent clicking inside modal from closing it
+          >
+            <button 
+              onClick={closeModel}
+              className="absolute -top-12 right-0 text-white bg-gray-800 bg-opacity-50 hover:bg-opacity-100 rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl z-50 transition"
+              aria-label="Close modal"
+            >
+              &times;
+            </button>
+            <div className="bg-white rounded-xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto w-full">
+              <ExperienceModel experience={selectedExperience} />
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

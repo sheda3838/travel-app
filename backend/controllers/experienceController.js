@@ -52,7 +52,9 @@ export const getAll = async (req, resp) => {
         }
       : {};
 
-    const experiences = await Experience.find({ ...keyword })
+    const experiences = await Experience.find({
+      ...keyword,
+    })
       .sort({ createdAt: -1 }) //sort latest created experience
       .skip(skip)
       .limit(limit)
@@ -127,13 +129,11 @@ export const update = async (req, resp) => {
 
     await experience.save();
 
-    resp
-      .status(200)
-      .json({
-        success: true,
-        message: "Experience updated successfully",
-        data: experience,
-      });
+    resp.status(200).json({
+      success: true,
+      message: "Experience updated successfully",
+      data: experience,
+    });
   } catch (error) {
     console.error(error);
     resp
@@ -141,7 +141,6 @@ export const update = async (req, resp) => {
       .json({ success: false, message: "Failed to update experience" });
   }
 };
-
 
 //delete experience
 export const deleteOne = async (req, resp) => {
@@ -163,7 +162,9 @@ export const deleteOne = async (req, resp) => {
     //delete experience from db
     await Experience.findByIdAndDelete(req.params.id);
 
-    resp.status(200).json({ success: true, message: "Experience deleted successfully" });
+    resp
+      .status(200)
+      .json({ success: true, message: "Experience deleted successfully" });
   } catch (error) {
     console.error(error);
     resp
@@ -182,7 +183,8 @@ export const getMine = async (req, resp) => {
     const experiences = await Experience.find({ creator: req.user._id })
       .sort({ createdAt: -1 })
       .skip(skip)
-      .limit(limit);
+      .limit(limit)
+      .populate("creator", "name email");
 
     const total = await Experience.countDocuments({ creator: req.user._id });
 
