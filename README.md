@@ -138,6 +138,17 @@ The application will now be running on `http://localhost:5173`.
 - Interactive user reviews and star rating schemas for the experiences.
 - Adding a "Favorites" bookmark section restricted explicitly to logged-in users.
 
+## Product Thinking Question
+**If this platform had 10,000 travel listings, what changes would you make to improve performance and user experience?**
+
+If the platform had 10,000 travel listings:
+- Implement server-side pagination or infinite scroll to reduce initial load.
+- Use database indexing on commonly searched fields (title, location) to speed up queries.
+- Implement caching strategies (e.g., Redis) for frequently accessed public feed data.
+- Optimize API responses, returning only necessary fields for listing previews.
+- Consider load balancing if user traffic spikes.
+- Add frontend filtering to reduce the number of API calls.
+
 ## Screenshots
 
 ### Main Feed
