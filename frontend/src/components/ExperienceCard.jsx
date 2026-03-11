@@ -59,7 +59,7 @@ function ExperienceCard({ experience, onDelete }) {
                   e.stopPropagation();
                   navigate(`/edit/${experience._id}`);
                 }}
-                className="text-blue-600 hover:text-blue-800 font-medium px-2 py-1 rounded hover:bg-blue-50 transition"
+                className="text-primary hover:text-primary-hover font-medium px-2 py-1 rounded hover:bg-orange-50 transition"
               >
                 Edit
               </button>

@@ -11,7 +11,7 @@ function Pagination({ page, pages, onPageChange }) {
         className={`px-4 py-2 rounded font-medium ${
           page === 1
             ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-            : "bg-blue-600 text-white hover:bg-blue-700 transition"
+            : "bg-primary text-white hover:bg-primary-hover transition"
         }`}
       >
         Prev
@@ -27,7 +27,7 @@ function Pagination({ page, pages, onPageChange }) {
         className={`px-4 py-2 rounded font-medium ${
           page === pages
             ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-            : "bg-blue-600 text-white hover:bg-blue-700 transition"
+            : "bg-primary text-white hover:bg-primary-hover transition"
         }`}
       >
         Next

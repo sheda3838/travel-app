@@ -41,7 +41,7 @@ function ExperienceForm({ initialData = {}, onSubmit, isLoading }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-6 rounded-lg shadow-md max-w-2xl mx-auto"
+      className="bg-white p-4 sm:p-6 rounded-lg shadow-md max-w-2xl mx-auto"
     >
       <div className="mb-4">
         <label htmlFor="title" className="block text-gray-700 font-medium mb-2">
@@ -54,7 +54,7 @@ function ExperienceForm({ initialData = {}, onSubmit, isLoading }) {
           value={formData.title}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
           placeholder="E.g., Sunset Yoga in Bali"
         />
       </div>
@@ -73,7 +73,7 @@ function ExperienceForm({ initialData = {}, onSubmit, isLoading }) {
           value={formData.location}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
           placeholder="E.g., Bali, Indonesia"
         />
       </div>
@@ -92,7 +92,7 @@ function ExperienceForm({ initialData = {}, onSubmit, isLoading }) {
           value={formData.imageUrl}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
           placeholder="https://example.com/image.jpg"
         />
         {formData.imageUrl && (
@@ -126,7 +126,7 @@ function ExperienceForm({ initialData = {}, onSubmit, isLoading }) {
             onChange={handleChange}
             min="0"
             step="0.01"
-            className="w-full pl-8 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full pl-8 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             placeholder="0.00"
           />
         </div>
@@ -146,7 +146,7 @@ function ExperienceForm({ initialData = {}, onSubmit, isLoading }) {
           onChange={handleChange}
           required
           rows="5"
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary resize-none"
           placeholder="Describe your experience..."
         ></textarea>
       </div>
@@ -156,8 +156,8 @@ function ExperienceForm({ initialData = {}, onSubmit, isLoading }) {
         disabled={isLoading}
         className={`w-full py-2 px-4 text-white font-medium rounded-md transition ${
           isLoading
-            ? "bg-blue-400 cursor-not-allowed"
-            : "bg-blue-600 hover:bg-blue-700"
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-primary hover:bg-primary-hover"
         }`}
       >
         {isLoading ? "Saving..." : "Save Experience"}

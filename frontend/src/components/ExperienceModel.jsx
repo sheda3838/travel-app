@@ -42,7 +42,7 @@ function ExperienceModel({ experience, onDelete }) {
       </div>
 
       {/* Right side: Details */}
-      <div className="md:w-1/2 p-8 flex flex-col">
+      <div className="md:w-1/2 p-6 sm:p-8 flex flex-col">
         <div className="flex justify-between items-start mb-4">
           <h1 className="text-3xl font-bold text-gray-900 leading-tight">
             {experience.title}
@@ -58,7 +58,7 @@ function ExperienceModel({ experience, onDelete }) {
           <span className="text-lg">{experience.location}</span>
         </div>
 
-        <div className="prose prose-blue max-w-none text-gray-700 flex-grow mb-8 whitespace-pre-line">
+        <div className="prose max-w-none text-gray-700 flex-grow mb-8 whitespace-pre-line">
           {experience.description}
         </div>
 
@@ -78,7 +78,7 @@ function ExperienceModel({ experience, onDelete }) {
               <div className="flex gap-3 w-full justify-end">
                 <Link
                   to={`/edit/${experience._id}`}
-                  className="px-6 py-2 bg-blue-100 text-blue-700 font-semibold rounded-lg hover:bg-blue-200 transition text-center"
+                  className="px-6 py-2 bg-orange-50 text-primary border border-primary font-semibold rounded-lg hover:bg-orange-100 transition text-center"
                 >
                   Edit Experience
                 </Link>
@@ -91,7 +91,7 @@ function ExperienceModel({ experience, onDelete }) {
               </div>
             ) : (
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg">
                   {experience.creator?.name
                     ? experience.creator.name.charAt(0).toUpperCase()
                     : "U"}

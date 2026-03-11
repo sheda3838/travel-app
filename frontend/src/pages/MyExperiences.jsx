@@ -84,7 +84,7 @@ function MyExperiences() {
           </p>
           <a
             href="/create"
-            className="text-blue-600 font-medium hover:underline"
+            className="text-primary font-medium hover:underline"
           >
             Create your first experience here
           </a>

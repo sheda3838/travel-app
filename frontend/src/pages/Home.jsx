@@ -83,11 +83,11 @@ function Home() {
             placeholder="Search destination or title..."
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-l-md w-full md:w-64 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-4 py-2 border border-gray-300 rounded-l-md w-full md:w-64 focus:outline-none focus:ring-2 focus:ring-primary"
           />
           <button
             type="submit"
-            className="bg-blue-600 text-white px-5 py-2 rounded-r-md hover:bg-blue-700 transition"
+            className="bg-primary text-white px-5 py-2 rounded-r-md hover:bg-primary-hover transition"
           >
             Search
           </button>
