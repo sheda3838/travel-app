@@ -37,7 +37,7 @@ function ExperienceCard({ experience, onDelete }) {
       <p className="text-sm text-gray-500 mb-3">{experience.location}</p>
       
       <p className="text-gray-700 text-sm mb-4 flex-grow">
-        {truncateDescription(experience.description, 50)}
+        {truncateDescription(experience.description, 80)}
       </p>
       
       <div className="flex justify-between items-center mt-auto pt-4 border-t border-gray-100 text-xs text-gray-500">

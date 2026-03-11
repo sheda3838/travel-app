@@ -93,7 +93,7 @@ function ExperienceModel({ experience, onDelete }) {
                   {experience.creator?.name ? experience.creator.name.charAt(0).toUpperCase() : "U"}
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Hosted by</p>
+                  <p className="text-sm text-gray-500">Posted by</p>
                   <p className="font-semibold text-gray-900">{experience.creator?.name || "Unknown User"}</p>
                 </div>
               </div>
